@@ -1,0 +1,222 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Purchase Details</title>
+    <link rel="stylesheet" href="{% static 'pharma/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pharma/css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pharma/css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"
+            integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/npm.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/script.js' %}"></script>
+</head>
+
+<body>
+    {% include 'pharma/nav.html' %}
+<div class="modal fade" id="modalContactForm" tabindex="-1">
+    <form action="/" method="post">
+        {% csrf_token %}
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i><label class="modaltext" for="form34"> Your name</label>
+                        <input type="text" id="form34" name="cu-name" class="form-control validate">
+                    </div>
+                    <div class="md-form">
+                        <i class="fa fa-envelope prefix grey-text"></i><label class="modaltext" for="form29"> Your email</label>
+                        <input type="email" id="form29" name="cu-mail" class="form-control validate">
+                    </div>
+                    <div class="md-form">
+                        <i class="fa fa-tag prefix grey-text"></i><label class="modaltext" for="form32"> Subject</label>
+                        <input type="text" id="form32" name="cu-subject" class="form-control validate">
+                    </div>
+                    <div class="md-form">
+                        <i class="fas fa-pencil-alt prefix grey-text"></i><label class="modaltext" for="form8"> Your message</label>
+                        <textarea type="text" id="form8" name="cu-message" class="md-textarea form-control"
+                                  rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn btn-brown">Send <i class="fas fa-paper-plane ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="panel panel-default col-md-8 jumcust2">
+        <div class="panel-heading">
+            <h1 class="padtop5">
+                {% if add %}
+                    Add Purchase Details
+                {% else %}
+                    Update Purchase Details
+                {% endif %}
+            </h1>
+        </div>
+        <div class="panel-body">
+            {% if purchase %}
+                <form action="{% url 'purchaseformupdate{{ purchase.id }}' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="productName" class="form-control-label">Product Name:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="pname" class="form-control" id="productName"
+                                   placeholder="Product Name" value="{{ purchase.pname }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="firstName" class="form-control-label">Customer Name:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="fname" class="form-control" id="firstName" placeholder="First Name"
+                                   value="{{ purchase.fname }}" required/>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="lname" class="form-control" id="lastName" placeholder="Last Name"
+                                   value="{{ purchase.lname }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="phn_no" class="form-control-label padtop5">Phone Number:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="pno" class="form-control" id="phn_no" placeholder="Contact Number"
+                                   value="{{ purchase.phn_no }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Price:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="price" class="form-control" id="price" placeholder="Price"
+                                   value="{{ purchase.price }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="qty" class="form-control-label padtop5">Quantity:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="qty" class="form-control" id="qty" placeholder="Quantity"
+                                   value="{{ purchase.qty }}" required/>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-default"><a href="/">Cancel</a></button>
+                        </div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}
+                            </button>
+                        </div>
+                        <div class="col-md-offset-8 padtop15">
+                            <button type="submit" class="delbut btn btn-danger"><a
+                                    href="{% url 'purchaseformdelete{{ purchase.id }}' %}">Delete Record</a></button>
+                        </div>
+                    </div>
+                </form>
+            {% else %}
+                <form action="{% url 'purchaseforminsert' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="productName" class="form-control-label">Product Name:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="pname" class="form-control" id="productName"
+                                   placeholder="Product Name" value="" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="firstName" class="form-control-label">Customer Name:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="fname" class="form-control" id="firstName" placeholder="First Name"
+                                   value="" required/>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="lname" class="form-control" id="lastName" placeholder="Last Name"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="phn_no" class="form-control-label padtop5">Phone Number:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="pno" class="form-control" id="phn_no" placeholder="Contact Number"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Price:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="price" class="form-control" id="price" placeholder="Price"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="qty" class="form-control-label padtop5">Quantity:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="qty" class="form-control" id="qty" placeholder="Quantity"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-default"><a href="/">Cancel</a></button>
+                        </div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+{% include 'pharma/pfooter.html' %}
+</body>
+</html>

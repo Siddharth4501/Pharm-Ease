@@ -1,0 +1,159 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dealer Details</title>
+    <link rel="stylesheet" href="{% static 'pharma/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pharma/css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pharma/css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"
+            integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/npm.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/script.js' %}"></script>
+</head>
+
+<body>
+    {% include 'pharma/nav.html' %}
+<div class="modal fade" id="modalContactForm" tabindex="-1">
+    
+</div>
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="panel panel-default col-md-8 jumcust2">
+        <div class="panel-heading">
+            <h1 class="padtop5">
+                {% if add %}
+                    Add Dealer Details
+                {% else %}
+                    Update Dealer Details
+                {% endif %}
+            </h1>
+        </div>
+        <div class="panel-body">
+            {% if dealer %}
+                <form action="{% url 'dealerformupdate' dealer.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="dname" class="form-control-label">Dealer Name:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="dname" class="form-control" id="dname" placeholder="Dealer Name"
+                                   value="{{ dealer.dname }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3 padtop5">
+                            <label for="address" class="form-control-label">Address:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" class="form-control" id="address" placeholder="Address" name="address"
+                                   value="{{ dealer.address }}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="phn_no" class="form-control-label padtop5">Phone Number:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="pno" class="form-control" id="phn_no" placeholder="Contact Number"
+                                   value="{{ dealer.phn_no }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="email" class="form-control-label padtop5">Email:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="email" class="form-control" id="email" placeholder="Email"
+                                   value="{{ dealer.email }}"/>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3 col-md-o"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="button" class="btn btn-default"><a href="/">Cancel</a></button>
+                        </div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}
+                            </button>
+                        </div>
+                        <div class="col-md-offset-8 padtop15">
+                            <button type="submit" class="delbut btn btn-danger"><a
+                                    href="{% url 'dealerformdelete' dealer.id %}">Delete Record</a></button>
+                        </div>
+                    </div>
+                </form>
+            {% else %}
+                <form action="{% url 'dealerforminsert' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="dname" class="form-control-label">Dealer Name:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="dname" class="form-control" id="dname" placeholder="Dealer Name"
+                                   value="" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3 padtop5">
+                            <label for="address" class="form-control-label">Address:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" class="form-control" id="address" placeholder="Address" name="address"/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="phn_no" class="form-control-label padtop5">Phone Number:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="pno" class="form-control" id="phn_no" placeholder="Contact Number"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="email" class="form-control-label padtop5">Email:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="email" class="form-control" id="email" placeholder="Email"/>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3 col-md-o"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="button" class="btn btn-default"><a href="/">Cancel</a></button>
+                        </div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+{% include 'pharma/pfooter.html' %}
+</body>
+</html>
+

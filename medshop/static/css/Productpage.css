@@ -1,0 +1,130 @@
+body{
+    font-size: 1.2rem;
+    background-color: #ddd;
+    
+}
+.productdesc{
+    border: 2px solid black;
+    width: 80vw;
+    background-color: white;
+    
+    margin: 1rem auto;
+}
+.productdesc_container{
+    display: flex;
+    background-color:snow;
+    
+}
+.product_imgdiv{
+    display: flex;
+    flex-direction: column;
+}
+.productdesc_cmn{
+    width: 50%;
+    /* border: 1px solid red; */
+    min-height: 53vh;
+}
+.product_img_innerdiv{
+    height: 336px;
+    width: 300px;
+    max-width: 100%;
+    padding-top: 2rem;
+    margin: 0 auto;
+}
+.product_img_innerdiv img{
+    width: 100%;
+    height: 100%;
+    
+    
+}
+.product_descriptiondiv{
+    display: flex;
+    
+    padding: 2rem;
+    
+    flex-direction: column;
+    background-color: antiquewhite;
+    
+    
+}
+.productusagediv{
+    display: flex;
+    flex-direction: column;
+}
+.descdiv{
+    max-height: 40%;
+    min-height: 20%;
+    border-bottom: 1px solid grey;
+}
+.productusagediv{
+    max-height: 60%;
+    height: 60%;
+    
+}
+.productusagediv div{
+    max-height: 36%;
+    min-height: 20%;
+    border-bottom: 1px solid black;
+} 
+.product_imgdiv{
+    animation: move_from_left 0.7s ease-in-out;
+    
+}
+.product_descriptiondiv{
+    animation: move_from_right 0.7s ease-in-out;
+}
+.med-medicine-show-section{
+    animation: move_from_down 0.7s ease-in-out;
+}
+.similar_prod_head{
+    animation: move_from_left 0.7s ease-in-out;
+}
+.med-nav-animate{
+    animation: move_from_up 0.7s ease-in-out;
+}
+@keyframes move_from_left{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+@keyframes move_from_right{
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+@keyframes move_from_down{
+    0%{
+        transform: translateY(100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+@keyframes move_from_up{
+    0%{
+        transform: translateY(-100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+@media(max-width:800px) {
+    .productdesc_container{
+        flex-direction: column;
+        
+    }
+    .productdesc_cmn{
+        width: 100%;
+        min-height: 40vh;
+    }
+    .product_descriptiondiv{
+        padding: 0;
+        padding-top: 2rem;
+    }
+}

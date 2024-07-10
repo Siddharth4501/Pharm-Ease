@@ -1,0 +1,300 @@
+html{
+  scroll-behavior: smooth;
+}
+
+
+body{
+    background-color: whitesmoke;
+  }
+    .navbar-text{
+        color: white;
+    }
+    .med-nav a{
+        font-weight: 600;
+        color: white;
+    }   
+    /* .med-nav a::after{
+      content: "";
+      position: absolute;
+      background-color: red;
+      height: 3px;
+      width: 0;
+      left: 0;
+      bottom: -10px;
+      transition: 0.3s;
+    }
+    .med-nav a:hover::after{
+      width: 100%;
+    } */
+    .med-about-section{
+      margin-top: 0.1rem;
+      
+    } 
+    .card-img-top{
+      height: 200px;
+    }
+    .med-medicine-show-section{
+      margin-top: 2rem;
+
+      
+    }
+    .med-medicine-show-section:nth-last-child(2n) .swiper-slide{
+      background-color: silver;
+      
+    }
+    .med-medicine-show-section .card{
+      width: 27%;
+      margin: 2rem;
+    }
+    
+    /* .med-medicine-show-section .card:nth-child(3n-2){
+      margin-left: 6rem;
+    } */
+
+    .moving-link {
+      
+      font-size: 1.3rem;  
+      text-decoration: none;
+      
+    }
+    .med-search-section{
+      
+      width: 50vw;
+      margin: 2rem auto;
+    }
+    .moving-link{
+      color: crimson;
+      text-decoration: none;
+      
+    }
+    .moving-link:hover{
+      color: brown;
+      
+    }
+    .med-login-modal{
+      background-color: black;
+      color: white;
+    }
+    
+    .navbar-toggler-icon{
+      color: white;
+    }
+    .nav-item:not(:nth-last-child(1)){
+      position: relative;
+      border: none;
+    }
+    
+    .nav-item:not(:nth-last-child(1))::after{
+      content: "";
+      position: absolute;
+      background-color: brown;
+      height: 3px;
+      width: 0;
+      left: 0;
+      bottom: 0;
+      transition: 0.4s ease-in-out;
+    }
+    
+    
+    .nav-item:not(:nth-last-child(1)):hover::after{
+      width: 100%;
+      
+    }
+    
+    .nav-item:not(:nth-last-child(1)):hover a{
+      color: whitesmoke;
+      scale: 1.1;
+    }
+    .nav-item:not(:nth-last-child(1)) a{
+      color: white;
+    }
+    
+    /* .swiper {
+  width: 100%;
+  height: 100%;
+} */
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+
+.swiper-slide img {
+  display: block;
+  max-width: 100%;
+  
+  mix-blend-mode: darken;
+  height: 125px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 13px;
+  
+  transition: all 0.3s ease-in-out;
+}
+
+.swiper {
+  width: 100%;
+  height: 325px;
+  margin: 20px auto;
+}
+.card{
+  height: 90%;
+  background-color:ghostwhite;
+}
+.med-medicine-show-section .swiper-slide:nth-child(2n){
+  /* background-color: slategray; */
+  background: hsl(173, 5%, 34%);
+}
+.med-medicine-show-section .swiper-slide:nth-child(2n-1){
+  background-color:cadetblue;
+  
+}
+.med-medicine-show-section .swiper-slide:nth-last-child(1){
+  /* background-color:darkslateblue; */
+  /* background-color: rgb(209, 138, 145); */
+  background: hsl(256, 47%, 37%);
+  
+  
+  
+}
+.med-medicine-show-section .swiper-slide:first-child{
+  background-color: rgb(32, 87, 94);
+  
+}
+.swiper-slide{
+  border-radius: 5%;
+  
+  box-shadow: 0.3rem 0.3rem 0.4rem black;
+}
+.swiper-slide .card{
+  border-radius: 5%;
+  
+}
+
+.log_out{
+  
+  
+  border: 1px solid black;
+  
+
+}
+.log_out:hover{
+  background-color: cadetblue;
+  color: whitesmoke;
+  transition: all 0.3s ease-in-out;
+}
+.nm:hover{
+  color: slategrey;
+}
+#suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: scroll;
+  display: none;
+    }
+
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.suggestion-item:hover {
+  
+  background-color: lightgrey;
+}
+.img-box{
+  overflow: hidden;
+  border-radius: 12px;
+}
+.img-box:hover img{
+  scale: 1.3;
+}
+/* .nav-item:hover{
+  transition: all 0.3s ease-in-out;
+  border-bottom: 2px solid white;
+} */
+.addtocartbtn{
+  background: linear-gradient(90deg,rgba(217, 132, 13),rgba(251, 192, 51));
+  
+}
+.addtocartbtn:hover{
+  background: linear-gradient(90deg,rgba(217, 132, 13),rgb(218, 132 ,13));
+}
+.preloader{
+  width: 100%;
+  height: 100vh;
+  background: black url("/static/media/303.gif");
+  background-position: center center;
+  position: fixed;
+  background-repeat: no-repeat;
+  z-index: 100;
+  
+  
+}
+.btn-signup{
+  background-color:wheat;
+  border: none;
+  transition: all 400ms;
+  box-shadow: 0 0 10px  antiquewhite, 0 0 10px antiquewhite;
+}
+.btn-signup:hover{
+  background-color: antiquewhite;
+  box-shadow: none;
+}
+.nav-search-btn{
+  border-color: rgba(0, 0, 0, 0.767);
+  background-color: slategray;
+}
+.nav-search-btn:hover{
+  background-color:cadetblue
+}
+
+.lgsu-btn:hover{
+  scale: 1.1;
+  
+  
+}
+
+.three_info_items{
+  margin-top: 6rem;
+  font-family:sans-serif
+}
+.three_items_div{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  
+  
+}
+.three_items_div_cmn{
+  height: 300px;
+  width: 300px;
+  margin-bottom:2rem;
+  
+  border-radius: 1000px;
+  background-color: rgba(128, 128, 128, 0.579);
+  box-shadow: 0.3rem 0.3rem 0.4rem black;
+  border: 2px solid black;
+}
+.booking_availability{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}

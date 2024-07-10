@@ -1,0 +1,100 @@
+
+  {% if purchase %}
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong{{foo.uniqueid}}">
+    Link
+  </button>
+    
+
+  <div class="modal fade" id="exampleModalLong{{foo.uniqueid}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLongTitle"><b>Complete Details</b></h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 40px; padding-bottom: -2rem;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-body text-left">
+            <b>Customer Name:</b>{{foo.user}} <br><br>
+            <b>Payment id:</b>{{foo.payment_id}} <br><br>
+            <b>Order id:</b>{{foo.order_id}} <br><br>
+            <b>Date:</b>{{foo.datetime}} <br><br>
+            <div class="itemsbuyed">
+              {% for i in foo.ordered_items.all %}
+              <b>Product Name:</b>{{i.item}} <br><br>
+              <b>Product Quantity:</b>{{i.count}} <br><br>
+              
+              {% endfor %}
+            </div>
+            <b>Amount (in Rs):</b>{{foo.amount}} <br><br>
+            {% if foo.delivery_information.Prescription %}
+            <b>Prescription:</b><a href="{{foo.delivery_information.Prescription.url}}" style="color: blue;">See Prescription</a> <br><br>
+            {% endif %}
+            <b>Address:</b>{{foo.delivery_information.delivery_address1}} <br><br>
+            <b>Email:</b>{{foo.delivery_information.delivery_email}} <br><br>
+            <b>Phone Number:</b>{{foo.delivery_information.delivery_phno}} <br><br>
+            <b>City:</b>{{foo.delivery_information.delivery_city}} <br><br>
+            <b>State:</b>{{foo.delivery_information.delivery_state}} <br><br>
+            <b>Zip:</b>{{foo.delivery_information.delivery_zip}} <br><br>
+            
+            
+        </div>
+        
+        
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  {% elif med %}
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong{{foo.m_id}}">
+    Link
+  </button>
+  
+
+  <div class="modal fade" id="exampleModalLong{{foo.m_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLongTitle"><b>Complete Details</b></h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 40px; padding-bottom: -2rem;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        
+        <div class="modal-body text-left">
+          <b>Medicine Name:</b>{{foo.mname}} <br><br>
+          <b>Category:</b>{{foo.category}} <br><br>
+          <b>Dealer Name:</b>{{foo.dname}} <br><br>
+          <b>Description:</b>{{foo.desc}} <br><br>
+          <b>Key Benefits:</b>{{foo.keybenefits}} <br><br>
+          <b>Direction Of Use:</b>{{foo.dirofuse}} <br><br>
+          <b>Ingredients:</b>{{foo.ingredients}} <br><br>
+          <b>Manufacturing Date:</b>{{foo.med_mfg}} <br><br>
+          <b>Expiry Date:</b>{{foo.med_exp}} <br><br>
+          <b>MRP:</b>Rs.{{foo.med_mrp}} <br><br>
+          <b>Costprice:</b>Rs.{{foo.med_costprice}} <br><br>
+          <b>Costprice Perpack:</b>Rs.{{foo.med_perpack_price}} <br><br>
+          <b>Prescription Reqired:</b>{{foo.prescription_required}} <br><br>
+          <b>Stock:</b>{{foo.med_stock}} <br><br>
+          <b>Remaining Stock:</b>{{foo.med_remaining_stock}} <br><br>
+          <b>Uploaded Image:</b><a href="{{foo.med_img.url}}" style="color: blue;">Link</a> <br><br>
+          
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+  
+  

@@ -1,0 +1,64 @@
+body{
+    background: linear-gradient(90deg,hsla(0, 0%, 80%, 0.636),hsla(180, 20%, 1%, 0.471)),url(/static/media/flipbookback6.jpg);
+    background-position: center;
+    background-size: cover;
+}
+.container{
+    height: 12vh;
+    max-width: 100vw;
+    font-size: 1.2rem;
+    
+}
+
+
+
+.row div{
+    border: 2px solid black;
+}
+.myorderhead a:hover{
+    background-color: chocolate;
+}
+.myorderempty{
+    display: flex;
+    
+    flex-grow: 1;
+    height: 85vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    font-size: 2rem;
+    font-weight: 500;
+}
+@media(max-width:1400px){
+    .container{
+        font-size: 1.2rem;
+    
+}
+}
+
+@media(max-width:768px){
+    .container{
+    border: none;
+    
+    font-size: 1.4rem;
+    min-height: 30vh;
+    }
+.row div{
+    border: none;
+}
+.row div:nth-last-child(1){
+    
+    border-bottom: 4px solid black;
+}
+}
+@media(max-width:560px){
+    .myorderempty{
+        font-size: 1.6rem;
+    }
+}
+@media(max-width:430px){
+    .myorderempty{
+        font-size: 1.2rem;
+    }
+}

@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        body{
+            /* background-color: #ddd; */
+            background: linear-gradient(to bottom,rgba(0, 0, 0, 0.162),rgba(0, 0, 0, 0.321)),url("/static/media/adminbackpic.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: repeat;
+            /* background-attachment: fixed; */
+            height: 100vh;
+            width: 98vw;
+            
+        }
+        .msr_innercontainer{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        table{
+            font-size: 1.1rem;
+        }
+        .msr_inner_div{
+            width: 30vw;
+            border: 4px solid black;
+            border-radius: 50px;
+            padding-left: 1rem;
+            background-color: rgba(152, 127, 127, 0.841);
+            /* background-color: rgba(128, 0, 128, 0.299); */
+            margin-bottom: 1rem;
+            
+        }
+        .monthly_sale{
+            padding-right: 8rem;
+        }
+        @media(max-width:967px){
+            .msr_inner_div{
+                width:28vw;
+            }
+            .monthly_sale{
+                padding-right: 5rem;
+            }
+        }
+        @media(max-width:700px){
+            .msr_inner_div{
+                width:44vw;
+            }
+            .monthly_sale{
+                padding-right: 6rem;
+            }
+        }
+        @media(max-width:557px){
+            .msr_inner_div{
+                width:70vw;
+                margin: 1rem auto;
+            }
+            .monthly_sale{
+                padding-right: 8rem;
+            }
+        }
+        @media(max-width:398px){
+            .msr_inner_div{
+                width:80vw;
+                
+                margin: 1rem auto;
+            }
+            .monthly_sale{
+                padding-right: 5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <a href="/" style="background-color: brown; color: white; padding: 0.6rem; border-radius: 10px; text-decoration: none; float: right;">BACK</a>
+    <center><h1>Monthly Sales Report</h1></center>
+    
+    <div class="msr_container">
+        <div class="msr_innercontainer">
+            {% for medicine_data in monthly_sales_by_medicine %}
+            <div class="msr_inner_div">
+                <h3>{{ medicine_data.medicine.mname }}</h3>
+                
+                {% for monthly_sale in medicine_data.monthly_sales %}
+                {% if monthly_sale.singleeoq == "A" %}
+                <h3>EOQ:{{monthly_sale.eoq}}</h3>
+                {% endif %}
+                {% endfor %}
+                <table style="text-align: center; margin: 0 auto;">
+                    <thead>
+                    <tr>
+                        <th class="monthly_sale">Month</th>
+                        <th>Total Sales</th>
+                        
+                    </tr>
+                    
+                    </thead>
+                    <tbody>
+                    {% for monthly_sale in medicine_data.monthly_sales %}
+                        <tr>
+                            <td class="monthly_sale">{{ monthly_sale.month }}</td>
+                            <td>{{ monthly_sale.total_sales }}</td>
+                            
+                        </tr>
+                        
+                    {% endfor %}
+                    <!-- <thead>
+                        <tr>
+                            
+                        </tr>
+                    </thead>
+                    {% for EOQ in medicine_data.monthly_sales %}
+                    <tbody>
+                        <tr>
+                            
+                        </tr>
+                    </tbody>
+                    {% endfor %} -->
+                    </tbody>
+                </table>
+            
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Update</title>
+    <style>
+        body {
+    
+    
+            background: linear-gradient(to bottom,rgba(0, 0, 0, 0.162),rgba(0, 0, 0, 0.321)),url("/static/media/adminbackpic.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            /* background-attachment: fixed; */
+            height: 100vh;
+            width: 98vw;
+            
+    
+        }
+        .update_delivery_container{
+            display: flex;
+            width: 100%;
+            background-color: grey
+
+        }
+        .update_delivery_cmn{
+            border: 2px solid black;
+            width: 46%;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            
+        }
+        .update_delivery_by_admin{
+            width: 98vw;
+        }
+    </style>
+</head>
+<body>
+    <section class="update_delivery_status">
+        <center><p style="font-size: 2rem;"><b>Update Delivery Of Product</b></p></center>
+        <div class="gobackbtn">
+            <a href="/" style="text-decoration: none; background-color: brown; color: white; padding: 0.6rem; float: right; border-radius: 5px; margin-bottom: 1rem;">Home</a>
+        </div>
+    </section> 
+    <section class="update_delivery_by_admin">
+        {% for i in payments %}
+        {% if i.delivery_status == 'received' %}
+        <div class="update_delivery_container">
+            <div class="update_delivery_cmn">
+                <b>S.No :</b>
+                {{forloop.counter}}
+            </div>
+            <div class="update_delivery_cmn">
+                <b>Order Id:</b>
+                {{i.uniqueid}}
+            </div>
+            <div class="update_delv_button" style="padding: 0.5rem; border: 2px solid black;">
+                <form action="{% url 'orderDelivered' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="update_delivery_status" value="{{i.uniqueid}}">
+                    <button type="submit" style="background-color: green; color: white;">Mark As Delivered</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </section>
+    {% if order_status %}
+    <script>
+        alert("Delivery Updated")
+    </script>
+    {% endif %}
+</body>
+</html>

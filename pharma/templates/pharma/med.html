@@ -1,0 +1,395 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Medicine Details</title>
+    <link rel="stylesheet" href="{% static 'pharma/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pharma/css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pharma/css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"
+            integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/npm.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/script.js' %}"></script>
+</head>
+
+<body>
+    {% include 'pharma/nav.html' %}
+<div class="modal fade" id="modalContactForm" tabindex="-1">
+    <form action="/" method="post">
+        {% csrf_token %}
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i><label class="modaltext" for="form34"> Your name</label>
+                        <input type="text" id="form34" name="cu-name" class="form-control validate">
+                    </div>
+                    <div class="md-form">
+                        <i class="fa fa-envelope prefix grey-text"></i><label class="modaltext" for="form29"> Your email</label>
+                        <input type="email" id="form29" name="cu-mail" class="form-control validate">
+                    </div>
+                    <div class="md-form">
+                        <i class="fa fa-tag prefix grey-text"></i><label class="modaltext" for="form32"> Subject</label>
+                        <input type="text" id="form32" name="cu-subject" class="form-control validate">
+                    </div>
+                    <div class="md-form">
+                        <i class="fas fa-pencil-alt prefix grey-text"></i><label class="modaltext" for="form8"> Your message</label>
+                        <textarea type="text" id="form8" name="cu-message" class="md-textarea form-control"
+                                  rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn btn-brown">Send <i class="fas fa-paper-plane ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="panel panel-default col-md-8 jumcust2">
+        <div class="panel-heading">
+            <h1 class="padtop5">
+                {% if add %}
+                    Add Medicine Details
+                {% else %}
+                    Update Medicine Details
+                {% endif %}</h1>
+        </div>
+        <div class="panel-body">
+            {% if med %}
+                <form action="{% url 'medformupdate' med.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-3 padtop5">
+                            <label for="m_id" class="form-control-label">Medicine Code:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="m_id" placeholder="Code" name="mid" value="{{med.m_id}}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Medicine Name:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="mname" class="form-control" id="mname" placeholder="Medicine Name"
+                                   value="{{med.mname}}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="remstock" class="form-control-label padtop5">Category:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="category" class="form-control" id="category" placeholder="category"
+                                   value="{{med.category}}"/>
+                            
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3 padtop5">
+                            <label for="dname" class="form-control-label">Dealer Name:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="dname" class="form-control" id="dname" placeholder="Dealer Name"
+                                   value="{{med.dname}}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Medicine MRP:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="Medicine_MRP" class="form-control" id="Medicine_MRP" placeholder="Medicine MRP" value="{{med.med_mrp}}"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Medicine CP:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="Medicine_CP" class="form-control" id="Medicine_CP" placeholder="Medicine CP" value="{{med.med_costprice}}"
+                                   required/>
+                        </div>
+                    </div>
+                    
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="stock" class="form-control-label padtop5">Stock:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="stock" class="form-control" id="stock" placeholder="Stock" value="{{med.med_stock}}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="remstock" class="form-control-label padtop5">Remaining Stock:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="remstock" class="form-control" id="remstock" placeholder="Remaining Stock"
+                                   value="{{med.med_remaining_stock}}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="desc" class="form-control-label padtop5">Description:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="desc" class="form-control" id="desc" placeholder="Description" value="{{med.desc}}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Key Benefits:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="Key_Benefits" class="form-control" id="Key_Benefits" placeholder="Key Benefits"
+                                   value="{{med.keybenefits}}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Direction Of Use:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="Direction_Of_Use" class="form-control" id="Direction_Of_Use" placeholder="Direction Of Use"
+                                   value="{{med.dirofuse}}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Ingredients:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="Ingredients" class="form-control" id="Ingredients" placeholder="Ingredients"
+                                   value="{{med.ingredients}}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Manufacturing Date:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="med_mfg" class="form-control" id="med_mfg" placeholder="Manufacturing Date" value="{{ med.med_mfg|date:'Y-m-d' }}"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Expiry Date:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="med_exp" class="form-control" id="med_exp" placeholder="Expiry Date" value="{{ med.med_exp|date:'Y-m-d' }}"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Image:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            
+                            <input type="file" name="medimg" class="form-control" id="medimg" placeholder="Image" value="{{med.med_img.url}}"
+                                    />
+                            <a href="{{med.med_img.url}}" style="color: blue;">Image Link</a>
+                        </div>
+                    </div>
+                    
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="button" class="btn btn-default"><a href="/">Cancel</a></button>
+                        </div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}</button>
+                        </div>
+                        <div class="col-md-offset-8 padtop15">
+                            <button type="submit" class="delbut btn btn-danger"><a
+                                    href="{% url 'medformdelete' med.id %}">Delete Record</a></button>
+                        </div>
+                    </div>
+                </form>
+            {% else %}
+                <form action="{% url 'medforminsert' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-3 padtop5">
+                            <label for="m_id" class="form-control-label">Medicine Code:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="m_id" placeholder="Code" name="mid"/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Medicine Name:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="mname" class="form-control" id="mname" placeholder="Medicine Name"
+                                   value="" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="remstock" class="form-control-label padtop5">Category:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="category" class="form-control" id="category" placeholder="category"
+                                   value=""/>
+                            
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3 padtop5">
+                            <label for="dname" class="form-control-label">Dealer Name:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="dname" class="form-control" id="dname" placeholder="Dealer Name"
+                                   value=""/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Medicine MRP:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="Medicine_MRP" class="form-control" id="Medicine_MRP" placeholder="Medicine MRP"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Medicine CP:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="Medicine_CP" class="form-control" id="Medicine_CP" placeholder="Medicine CP"
+                                   required/>
+                        </div>
+                    </div>
+                    
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="stock" class="form-control-label padtop5">Stock:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="stock" class="form-control" id="stock" placeholder="Stock"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="remstock" class="form-control-label padtop5">Remaining Stock:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="remstock" class="form-control" id="remstock" placeholder="Remaining Stock"
+                                   value=""/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="desc" class="form-control-label padtop5">Description:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="desc" class="form-control" id="desc" placeholder="Description"/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Key Benefits:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="Key_Benefits" class="form-control" id="Key_Benefits" placeholder="Key Benefits"
+                                   value="" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Direction Of Use:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="Direction_Of_Use" class="form-control" id="Direction_Of_Use" placeholder="Direction Of Use"
+                                   value="" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Ingredients:</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="Ingredients" class="form-control" id="Ingredients" placeholder="Ingredients"
+                                   value="" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Manufacturing Date:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="med_mfg" class="form-control" id="med_mfg" placeholder="Manufacturing Date"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Expiry Date:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="med_exp" class="form-control" id="med_exp" placeholder="Expiry Date"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Image:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="file" name="medimg" class="form-control" id="medimg" placeholder="Image"
+                                   value="" required/>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="button" class="btn btn-default"><a href="/">Cancel</a></button>
+                        </div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}</button>
+                        </div>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+{% include 'pharma/pfooter.html' %}
+</body>
+</html>
+

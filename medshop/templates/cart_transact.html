@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/carttransact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      
+    </style>
+</head>
+
+<body>
+  {% for message in messages %}
+    <div class="messages">
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong><center>Message:
+          {% if message.tags == "success" %}
+          <i class="fa-solid fa-check"></i>
+          {% else %}
+          <i class="fa-solid fa-circle-exclamation"></i>
+          {% endif %}
+        </strong>{{message}}</center>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    {% endfor %}
+
+  <div id="cartemp">
+    
+  </div>
+
+  {% if request.user.is_staff == False and request.user.username %}
+  <form method="post" action="{% url 'med_cart' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <section class="total-cart-items-show" id="total-cart-items-show-id">
+    <div class="items_on_pg" id="items_on_pgid">
+      <div class="items_on_left">
+        <div class="items_on_left_up">
+          <center><h2>Item<b>s</b> In Your Cart--</h2></center>
+          <div class="total-items-show-container">
+            <div class="cart-item-info_container-item" id="cart-Items">
+              
+            </div>
+          </div>
+        </div>
+      </div>  
+      <div class="items_on_right">
+        
+        <div class="items_on_right_up">
+          <center><h3>Enter Delivery Details Here..</h3></center>
+          <div class="row g-3 p-3">
+            
+              <div class="col-lg-12">
+                <label for="inputAddress1" class="form-label" >Address <span style="color: brown;">*</span></label>
+                <input type="text" class="form-control" id="useraddress" placeholder="1234 Main St" name="user_delivery_Address1" required>
+              </div>
+              <div class="col-lg-10" id="Prescription" style="display: none;" >
+                <label for="user_Prescription" class="form-label">Prescription <span style="color: brown;">*</span></label>
+                <input type="file" class="form-control" name="user_Prescription">
+                <span style="color: brown; font-size: 0.7rem;">Note-Some of your chosen products require Prescription</span>
+              </div>
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email <span style="color: brown;">*</span></label>
+                <input type="email" class="form-control" id="inputEmail" name="user_delivery_email" required>
+              </div>
+              <div class="col-md-6">
+                <label for="inputContactNumber" class="form-label">Contact Number <span style="color: brown;">*</span></label>
+                <input type="number" class="form-control" id="inputContactNumber" name="user_delivery_phno" required>
+              </div>
+              
+              <div class="col-md-5">
+                <label for="inputCity" class="form-label">City <span style="color: brown;">*</span></label>
+                <input type="text" class="form-control" id="inputCity" name="user_delivery_city" required>
+              </div>
+              <div class="col-md-4">
+                <label for="inputState" class="form-label">State <span style="color: brown;">*</span></label>
+                <select id="inputState" class="form-select" name="user_delivery_state" required>
+                  <option selected>Choose...</option>
+                  <option>Uttar Pradesh</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="inputZip" class="form-label">Zip <span style="color: brown;">*</span></label>
+                <input type="text" class="form-control" id="inputZip" name="user_delivery_zip" required>
+              </div>
+              <div class="col-md-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                  <label class="form-check-label" for="gridCheck">
+                    Check me out <span style="color: brown;">*</span>
+                  </label>
+                </div>
+              </div>
+              <center>
+                <div class="col-md-12">
+                  
+                  <button class="btn btn-primary" id="offcanvasRightid" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" onclick="swap_LtoR('L')">Continue</button>
+                </div>
+            ``</center>
+            </div>
+        </div>
+        
+      </div>
+        
+        
+      
+      
+    </div>
+    
+    
+  </section>
+  <section class="slidercart_checkout">
+    
+      <div class="cartoffcanvas">
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" data-bs-scroll="true" data-bs-backdrop="false" aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header">
+            <center><h5 id="offcanvasRightLabel" style="font-size: 2rem;">Checkout</h5></center>
+            <button type="button" id="offcanvasScrolling" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" onclick="swap_LtoR('R')"></button>
+          </div>
+          <div class="offcanvas-body">
+            <center>
+              <div class="total-savings-container" id="total-savings-containerid">
+                <div class="savings-para" id="savings-paraid">
+                  
+                </div>
+                <div class="savings-total-value" id="savings-total-valueid">
+                  
+                </div>
+              </div>
+            </center>
+            
+            <div class="total_cost_calculator_container">
+              <div class="cart_items_cmn cart-breakdown_heading"><h3>CART BREAKDOWN</h3></div>
+              <hr>
+              <div class="cart_items_cmn cart_total">
+                <div class="cart_total_items">Cart Total:</div>
+                <div class="cart_total_items" id="cart_total_item_divid"><p id="cart_total_item_id" class="cmnpara">Rs.0</p></div>
+              </div>
+              <div class="cart_items_cmn cart_discount">
+                <div class="cart_discount_items">Discount on MRP:</div>
+                <div class="cart_discount_items"><p id="cart_discount_item_id" class="cmnpara">Rs.0</p></div>
+              </div>
+              <div class="cart_items_cmn cart_delivery_charges">
+                <div class="cart_delivery_charges_items">Delivery Charges:</div>
+                <div class="cart_delivery_charges_items"><p id="cart_deliver_charges_item_id" class="cmnpara">Rs.49</p></div>
+              </div>
+              <hr>
+              <div class="cart_items_cmn cart_toPay">
+                
+                <div class="cart_toPay_items"><b>TO PAY</b></div>
+                <div class="cart_toPay_items" id="cart_toPay_item_divid"><b id="cart_toPay_item_id" class="cmnpara">Rs.</b></div>
+              </div>
+              <div class="cart_items_cmn proceed_toPay_btn" style="margin-top: 1rem;">
+                
+                <div class="proceed_toPay_btn_items">
+                  
+                  
+                    <input type="hidden" name="topay_sum" value="" id="topay_sumid">
+                    <input type="hidden" name="cart_data" id="cart_dataid">
+                    <center><button type="submit" style="color: white; background-color: green;" class="btn btn-primary" id="proceed_topayid" onclick="cartSend()">Proceed To Pay</button></center>
+                    
+                  
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+</form>
+
+  <br><br><br>
+  {% include 'footer.html' %}
+  {% else %}
+  <h1 style="display: flex; justify-content: center; align-items: center; align-self: center; width: 100vw; height: 100vh; color: darkslateblue; background-color: #ddd;">Please Login First!!!!!</h1>
+  {% endif %}
+    
+</body>
+<script src="/static/js/carttransact.js"></script>
+
+{% if order is not None %}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        
+        var options = {
+            "key": "rzp_test_nKdXE9eQOKfk9A", // Enter the Key ID generated from the Dashboard
+             
+            
+            "name": "Pharm Ease",
+            "description": "payment gateway",
+            "image": "https://example.com/your_logo",
+            "order_id": "{{order.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            // "handler": function (response){
+            //     alert(response.razorpay_payment_id);
+            //     alert(response.razorpay_order_id);
+            //     alert(response.razorpay_signature)
+            // },
+            "callback_url":"http://127.0.0.1:8000/thanks/",
+            "prefill": {
+                "name": "{{user.username}}",
+                "email": "{{user.email}}",
+            },
+            
+            "theme": {
+                "color": "#0c2f53ec"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+         rzp1.on('payment.failed', function (response){
+                 alert(response.error.code);
+                 alert(response.error.description);
+                 alert(response.error.source);
+                 alert(response.error.step);
+                 alert(response.error.reason);
+                 alert(response.error.metadata.order_id);
+                 alert(response.error.metadata.payment_id);
+         });
+         document.getElementById('rzp-button1').onclick = function(e){
+             rzp1.open();
+             e.preventDefault();
+         }
+    </script>
+    {% endif %}
+    
+</html>

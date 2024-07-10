@@ -1,0 +1,173 @@
+{% load static %}
+{% load Per_medicine_cost_filter %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Med Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/> -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/swiper.css">
+    <link rel="stylesheet" href="/static/css/medhome.css">
+</head>
+<body>
+    <div class="preloader"></div>
+    {% include 'mednav.html' %}
+    
+    {% for message in messages %}
+    <div class="messages" style="width: 100vw;">
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" data-mdb-ripple-init="3000" role="alert">
+        <strong><center>Message:
+          {% if message.tags == "success" %}
+          <i class="fa-solid fa-check"></i>
+          {% else %}
+          <i class="fa-solid fa-circle-exclamation"></i>
+          {% endif %}
+        </strong></center><div style="text-align: center;">{{message|linebreaksbr}}</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    {% endfor %}
+    <section class="moving-link-section">
+      <marquee behavior="alternate" direction="left" scrollamount="12">
+        
+        <a href="#" class="moving-link" style="font-family: cursive;">Feel Free To Order Medicines anytime..... We are available to deliver medicines 24*7</a>
+      </marquee>
+      <marquee behavior="alternate" direction="right" scrollamount="12">
+        <a href="#" class="moving-link" style="font-family: cursive;">Feel Free To Order Medicines anytime..... We are available to deliver medicines 24*7</a>
+      </marquee>
+    </section>
+    
+    <section class="med-about-section">
+        <div id="carouselExampleCaptions" class="carousel slide med-search-box">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active" style="background-color: rgba(0, 0, 0, 0.816)">
+                <img src="/static/media/carpic7.jpg" class="d-block w-100" alt="" style="height: 70vh; object-fit: contain; object-position: center;">
+                
+              </div>
+              <div class="carousel-item" style="background-color: #bd8950;">
+                <img src="/static/media/carpic3.jpg" class="d-block w-100" alt="" style="height: 70vh; object-fit: contain; object-position: center;">
+                
+              </div>
+              <div class="carousel-item" style="background-color: #01cfca;">
+                <img src="/static/media/carpic5.jpg" class="d-block w-100" alt="..." style="height: 70vh; object-fit: contain; object-position: center;">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+              <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+            
+        </div>
+    </section>
+    
+    <section class="three_info_items">
+      <div class="three_items_head" data-aos="fade-in" data-aos-duration="500">
+        <center><h1>Our Features</h1></center> <br>
+      </div>
+      <div class="three_items_div">
+        <div class="three_items_div_cmn" data-aos="slide-right" data-aos-duration="500" data-aos-offset="280">
+          <div class="booking_availability text-dark">
+            <b class="h2">24/7</b><p class="h2">Home Delivery <br><a href="" style="text-decoration: none; color: brown;">Order Now</a></p>
+          </div>
+        </div>
+        <div class="three_items_div_cmn" data-aos="zoom-in" data-aos-duration="500" data-aos-offset="280">
+          <div class="booking_availability text-dark">
+            <b class="h2">Variety Of</b><p class="h2">Payment Options<br><a href="https://razorpay.com/docs/api/payments/payment-links/customise-payment-methods/" target="_blank" style="text-decoration: none; color: brown;">Click Here</a></p>
+          </div>
+        </div>
+        <div class="three_items_div_cmn" data-aos="slide-left" data-aos-duration="500" data-aos-offset="280">
+          <div class="booking_availability text-dark">
+            <b class="h2">Heavy Discounts</b><p class="h2">On Products<br><a href="#med-medicine-show-sectionid" style="text-decoration: none; color: brown;">Click Here</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br><br><br><br><br>
+    <!-- <section class="med-search-section">
+      <div class="input-group" data-aos="flip-left">
+        <input type="search" class="form-control rounded" placeholder="Type the name of medicines here....." aria-label="Search" aria-describedby="search-addon" style="height: 7vh;"/>
+        <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+    </section> -->
+    <h2 style="font-weight: 700; color:black; display: inline;" data-aos="zoom-in" data-aos-duration="800">Shop By Category</h2>
+    {% for j in choices %}
+    <center><h2 style="font-weight: 700; color:black; display: inline;" data-aos="zoom-in" data-aos-duration="800">{{j}}</h2></center>
+    <section class="med-medicine-show-section" id="med-medicine-show-sectionid">
+      
+      <div #swiperRef="" class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          
+          {% for i in medicine %}
+          {% if j == i.category %}
+          <div class="swiper-slide" style="opacity:0.9;" data-aos="flip-left" data-aos-duration="800">
+            <div class="card " style="width: 100%;" >
+              
+              <div class="img-box">
+                <img src="{{i.med_img.url}}" class="card-img-top" alt="..">
+              </div>
+              
+              <div class="card-body">
+                <h5 class="card-title">{{i.mname}}</h5>
+                <p class="card-text">Rs.{{ i.med_perpack_price|calculate_discounted_price:10 }} <br> <del>MRP{{i.med_perpack_price}}</del><b style="color: brown;">10%off</b></p>
+                {% if i.med_remaining_stock == 0 %}
+                <div class="outofsctock">Out Of Stock</div>
+                {% else %}
+                {% if request.user.is_staff == False %}
+                <a href="#addtocart" class="btn addtocartbtn" onclick="addToCart('{{i.m_id}}','{{i.mname}}','{{ i.med_perpack_price|calculate_discounted_price:10 }}','{{request.user.username}}','{{i.med_perpack_price}}','{{i.med_img.url}}','{{i.prescription_required}}','{{i.med_remaining_stock}}')">Add To Cart</a>
+                {% else %}
+                <a href="#addtocart" class="btn addtocartbtn" onclick="addToCart('{{i.m_id}}','{{i.mname}}','{{ i.med_perpack_price|calculate_discounted_price:10 }}','none','{{i.med_perpack_price}}','{{i.med_img.url}}','{{i.prescription_required}}','{{i.med_remaining_stock}}')">Add To Cart</a>
+                {% endif %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        <div class="swiper-button-next" style="color: black;"></div>
+        <div class="swiper-button-prev" style="color: black;"></div>
+        <div class="swiper-pagination" style="font-weight: 700;"></div>
+      </div>
+      
+    </section>
+    {% endfor %}
+
+    <br><br><br>
+    
+    {% include "footer.html" %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      var search_list_json=`{{ search_list | safe }}`
+    </script>
+    <script src="/static/js/allcommon.js" defer ></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        offset: 200,
+        
+      });
+    </script>
+    
+  
+  
+</body>
+</html>

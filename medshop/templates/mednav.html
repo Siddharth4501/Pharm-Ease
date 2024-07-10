@@ -1,0 +1,158 @@
+<nav class="navbar navbar-expand-xxl bg-dark med-nav">
+    <div class="container-fluid med-nav-animate">
+      <a class="navbar-brand" href="#" style="font-family: cursive;"><b>Pharm Ease</b></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="color: white;"></i></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item mt-2" style="font-size: 1rem;">
+            <a class="nav-link active" aria-current="page" href="/med_home/">Home</a>
+          </li>
+          {% if request.user.is_staff == False and request.user.username %} 
+          <li class="nav-item dropdown mt-2" style="font-size: 1rem; margin-right: 4rem;">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              More
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/Myorders/" style="color: black;">My Orders</a></li>
+              
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item dropdown mt-2" style="font-size: 1rem; margin-right: 4rem;">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Knowmore
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" style="color: black;">About</a></li>
+              <li><a class="dropdown-item" href="#" style="color: black;">Contact</a></li>
+              <li><hr class="dropdown-divider" style="color: black;">........For Store only.........</li>
+              <li><a class="dropdown-item" href="/AdminLogin/"style="color: black;">Store Login</a></li>
+            </ul>
+          </li>
+          {% endif %}
+          <li class="nav-item top-nav-med-search" id="nav-item top-nav-med-search_id" style="min-width: 45vw;">
+            <form action="{% url 'productpage' %}" method="post">
+                {% csrf_token %}
+                <div class="input-group my-2 my-lg-0" style="width: 100%;" data-aos="fade-in">
+                    <input type="search" id="search" name="medname"  class="fntrol sm-2 rounded" placeholder="Type the name of medicines here....." aria-label="Search" aria-describedby="search-addon" style="height: 7vh; width: 92%;" />
+                    <button type="submit" class="btn nav-search-btn" data-mdb-ripple-init><i class="fa-solid fa-magnifying-glass" style="color: white"></i></button>
+                </div>
+            </form>
+          </li>
+          
+          
+        </ul>
+        {% if request.user.is_staff == False and request.user.username %}
+        <a class="nav-link nm" aria-disabled="true"><b style="font-family: cursive;">Welcome {{request.user.username}}</b></a>
+        {% endif %}
+
+        
+        {% if request.user.is_staff == False and request.user.username %}    
+        <a href="{% url 'logout' %}" class="log_out btn bg-danger" onclick="RemoveCurrentUserItems()">Logout</a>
+        
+        {% else %}
+        <div class="login-signup-cont d-flex" style="flex-wrap: wrap;">
+          
+          <div class="login-signup-cont-login">
+            <button type="button" class="btn nav-link lgsu-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="color: black; background-color:rgb(246, 198, 109);">
+              Login
+            </button>
+
+            
+            <div class="modal fade bg-dark" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark border" style="color: wheat; font-weight: 900; box-shadow: 0.3rem 0.3rem 0.4rem grey;">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Login to explore our services
+                    </h5>
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="{% url 'Login' %}" method="post">
+                      {% csrf_token %}
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Username</label>
+                        <input type="text" class="form-control text-light bg-dark" style="border: none; border-bottom: 2px solid wheat;" id="formGroupExampleInput" placeholder="Enter Username" name="login_username" required>
+                      </div>
+                      
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Password</label>
+                        <input type="text" class="form-control text-light bg-dark" style="border: none; border-bottom: 2px solid wheat;" id="formGroupExampleInput2" placeholder="Enter Password" name="login_password" required>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn" style="background: hsl(229, 8%, 72%);" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-signup" >Login</button>
+                      </div>
+                    </form>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="login-signup-cont-signup">
+            
+            <button type="button" class="btn nav-link lgsu-btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="color: black; margin: 0 0.3rem; background-color: rgb(246, 198, 109);">
+              Signup
+            </button>
+
+            
+            <div class="modal fade bg-dark" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark border" style="color: wheat; font-weight: 900; box-shadow: 0.3rem 0.3rem 0.4rem grey;">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Signup and order medicines!!
+                    </h5>
+                    <button type="button" class="btn-close bg-light"  data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="{% url 'signup' %}" method="post">
+                      {% csrf_token %}
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Username</label>
+                        <input type="text" class="form-control text-light bg-dark" style="border: none; border-bottom: 2px solid wheat;" id="formGroupExampleInput5" placeholder="Enter Username" name="signup_username" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Email</label>
+                        <input type="text" class="form-control bg-dark text-light" style="border: none; border-bottom: 2px solid wheat;" id="formGroupExampleInput6" placeholder="Enter Email" name="signup_email" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Password</label>
+                        <input type="text" class="form-control bg-dark text-light" style="border: none; border-bottom: 2px solid wheat;" id="formGroupExampleInput7" placeholder="Enter Password" name="signup_password" required>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn" data-bs-dismiss="modal" style="background: hsl(229, 8%, 72%);">Close</button>
+                        <button type="submit" class="btn btn-signup">Signup</button>
+                      </div>
+                    </form>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        
+              
+          
+        
+        
+        <form class="d-flex" role="search">
+          
+          <a href="/med_cart" class="btn btn-outline-success" type="submit"><span id="cartCount" style="top: 15px; right: 0;" class="position-absolute start-70 translate-middle badge rounded-pill bg-danger">0</span><i class="fa-solid fa-cart-shopping">Cart</i></a>
+          
+        </form>
+        
+        
+      </div>
+    </div>
+    
+</nav>
+<div>
+    <center><ul id="suggestions"></ul></center>
+</div>

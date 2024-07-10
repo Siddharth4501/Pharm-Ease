@@ -1,0 +1,61 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>
+		{% block title %}
+		GST Billing
+		{% endblock %}
+	</title>
+
+
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static "pharma/bootstrap-4.4.1-dist/css/bootstrap-cosmo.min.css" %}">
+	<link rel="stylesheet" href="{% static "pharma/css/main.css" %}">
+
+	<!-- DataTables CSS  -->
+	<link rel="stylesheet" href="{% static "pharma/DataTables/jquery.dataTables.min.css" %}">
+	<link rel="stylesheet" href="{% static "pharma/DataTables/dataTables.bootstrap4.min.css" %}">
+
+	{% block includecss %}
+	{% endblock %}
+
+</head>
+
+<body>
+
+	
+
+
+
+
+
+		{% block content %}
+		CONTENT BLOCK
+		{% endblock %}
+
+
+
+
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="{% static "pharma/js/jquery-3.4.1.min.js" %}"></script>
+	<script src="{% static "pharma/js/popper.min.js" %}"></script>
+
+	<script src="{% static "pharma/bootstrap-4.4.1-dist/js/bootstrap.min.js" %}"></script>
+
+	<!-- DataTables  -->
+	<script src="{% static "pharma/DataTables/jquery.dataTables.min.js" %}"></script>
+
+	{% block includejs %}
+	{% endblock %}
+
+</body>
+
+
+</html>

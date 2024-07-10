@@ -1,0 +1,122 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pharma/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pharma/css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pharma/css/style.css' %}">
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"
+            integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/npm.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pharma/js/script.js' %}"></script>
+    <title>All Purchase Details</title>
+    <style>
+        
+        .responsive_visible{
+            display: none;
+        }
+        @media(max-width:930px) {
+            .responsive_invisible{
+                display: none;
+                
+            }
+            .responsive_visible{
+                display:inline-table;
+                
+            }
+            
+        }
+
+    </style>
+</head>
+<body>
+    {% include 'pharma/nav.html' %}
+<div class="modal fade" id="modalContactForm" tabindex="-1">
+    
+</div>
+<div class="container-fluid martop7">
+    <div class="jumbotron jumcust">
+        <h2>Purchase Details</h2>
+        <div class="row padtop15">
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <table border="1" class="table table-responsive table-hover col-md-10 responsive_invisible ">
+                <tr>
+                    <th>Purchase ID</th>
+                    <!-- <th>Product Name</th> -->
+                    <th>Name</th>
+                    <th>Payment Id</th>
+                    <th>Date</th>
+                    <!-- <th>Price</th> -->
+                    <!-- <th>Quantity</th> -->
+                    <th>Total</th>
+                    <th>Details</th>
+                </tr>
+                {% for foo in purchase %}
+                    <tr>
+                        
+                        <!-- <td>{{ foo.pname }}</td>
+                        <td>{{ foo.fname }}</td>
+                        <td>{{ foo.lname }}</td>
+                        <td>{{ foo.phn_no }}</td>
+                        <td>{{ foo.price }}</td>
+                        <td>{{ foo.qty }}</td>
+                        <td>{{ foo.total }}</td> -->
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ foo.user }}</td>
+                        <td>{{ foo.payment_id }}</td>
+                        <td >{{ foo.datetime }}</td>
+                        <td>₹{{ foo.amount }}</td>
+                        <td>
+                            {% include 'pharma/details.html' %}
+                        </td>
+                        <!-- <td>{{ foo.phn_no }}</td>
+                        <td>{{ foo.price }}</td>
+                        <td>{{ foo.qty }}</td>
+                        <td>{{ foo.total }}</td> -->
+                    </tr>
+                {% endfor %}
+            </table>
+            <table border="1" class="table table-responsive table-hover col-md-12 responsive_visible">
+                <tr>
+                    <th>Purchase ID</th>
+                    
+                   
+                    <th>Date</th>
+                    
+                    
+                    <th>Details</th>
+                </tr>
+                {% for foo in purchase_at_responsive %}
+                <tr>
+                    
+                    
+                    <td>{{ forloop.counter }}</td>
+                    
+                    
+                    <td >{{ foo.datetime }}</td>
+                    
+                    <td>
+                        {% include 'pharma/details.html' %}
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <footer><h3>Click on a Purchase ID to Update or Delete the record.</h3></footer>
+    </div>
+</div>
+{% include 'pharma/pfooter.html' %}
+</body>
+</html>
