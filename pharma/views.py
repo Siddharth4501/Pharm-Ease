@@ -479,7 +479,7 @@ def AdminLogin(request):
                     'Alert!!!',
                     'Someone tried to login but enterted wrong details',
                     'settings.EMAIL_HOST_USER',
-                    ['siddharth130040@gmail.com'],
+                    [''],//admin email id 
                     fail_silently=False
                     )
                 messages.error(request,'Password Or Pharmacy ID is wrong')
@@ -542,7 +542,7 @@ def orderDelivered(request):
             'Wowwwww!!!!',
             'Your order has been delivered,thankyou for choosing us',
             'settings.EMAIL_HOST_USER',
-            ['siddharth130040@gmail.com'],
+            [''],//coustomer email id
             fail_silently=False
         )
         if payment.delivery_status=='Delivered':
